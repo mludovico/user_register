@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:user_register/blocs/states.dart';
 import 'package:user_register/helpers/validators.dart';
@@ -48,7 +49,43 @@ class LoginBloc extends BlocBase {
   }
 
   void loginWithFacebook(){
+    try{
+      Faceb
+      // final AuthCredential credential
+      //   = FacebookAuthProvider.credential();
+    }catch(e, stackTrace){
+      print(e);
+      print(stackTrace);
+      _stateController.add(LoginState.FAIL);
+    }
+  }
 
+  void loginWithGoogle() async {
+    try {
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+      final GoogleSignInAccount googleSignInAccount
+        = await googleSignIn.signIn();
+      final GoogleSignInAuthentication googleSignInAuthentication
+        = await googleSignInAccount.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        idToken: googleSignInAuthentication.idToken,
+        accessToken: googleSignInAuthentication.accessToken
+      );
+
+      final UserCredential userCredential
+        = await _firebase.signInWithCredential(credential);
+
+      final User user = userCredential.user;
+      if(user != null)
+        _stateController.add(LoginState.SUCCESS);
+      else
+        _stateController.add(LoginState.FAIL);
+    } catch (e, stackTrace) {
+      print(e);
+      print(stackTrace);
+      _stateController.add(LoginState.IDLE);
+    }
   }
 
   @override

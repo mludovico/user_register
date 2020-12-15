@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:user_register/blocs/forgot_password_bloc.dart';
 import 'package:user_register/blocs/states.dart';
 import 'package:user_register/constants/ui_styles.dart';
+import 'package:user_register/screens/register_screen.dart';
 import 'package:user_register/screens/widgets/input_field.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -39,9 +40,42 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           );
           Navigator.of(context).pop();
           break;
-        case LoginState.LOADING:
-        case LoginState.IDLE:
         case LoginState.FAIL:
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text('Erro na recuperação'),
+              content: Text('Não foi possível verificar as informações.'),
+              actions: [
+                StreamBuilder<String>(
+                  stream: _bloc.outEmail,
+                  builder: (context, snapshot) {
+                    if(snapshot.hasData)
+                      return FlatButton(
+                        child: Text('Cadastrar'),
+                        onPressed: () async {
+                          Navigator.of(context).pop();
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(builder: (_) => RegisterScreen(email: snapshot.data))
+                          );
+                        },
+                      );
+                    else
+                      return Container();
+                  }
+                ),
+                FlatButton(
+                  child: Text('OK'),
+                  onPressed: (){
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          );
+          break;
+        case LoginState.IDLE:
+        case LoginState.LOADING:
       }
     });
     super.didChangeDependencies();
@@ -99,8 +133,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       onChanged: _bloc.changeEmail,
                     ),
                     InputField(
-                      iconData: Icons.calendar_today_outlined,
-                      hint: 'Data de nascimento',
+                      iconData: Icons.wysiwyg_outlined,
+                      hint: 'CPF',
                       stream: _bloc.outCpf,
                       obscure: false,
                       onChanged: _bloc.changeCpf,

@@ -26,20 +26,21 @@ class ForgotPasswordBloc extends BlocBase {
 
   void passwordRecover() async {
     _stateController.add(LoginState.LOADING);
-    var providers = await _firebase.fetchSignInMethodsForEmail(_emailController.value);
-    if(providers.length > 0)
-      providers.forEach((element) {print(element);});
-    _stateController.add(LoginState.IDLE);
-    // QuerySnapshot user = await _firestore.collection('users')
-    //   .where('email', isEqualTo: _emailController.value)
-    //   .where('cpf', isEqualTo: _cpfController.value)
-    //   .get();
-    // if(user.size > 0) {
-    //   await _firebase.sendPasswordResetEmail(email: _emailController.value);
-    //   _stateController.add(LoginState.IDLE);
-    // }else{
-    //   _stateController.add(LoginState.FAIL);
-    // }
+    QuerySnapshot user = await _firestore.collection('users')
+      .where('email', isEqualTo: _emailController.value)
+      .where('cpf', isEqualTo: _cpfController.value)
+      .get();
+    if(user.size > 0) {
+      await _firebase.sendPasswordResetEmail(email: _emailController.value)
+        .catchError((error) {
+          print(error);
+          _stateController.add(LoginState.FAIL);
+          return;
+        });
+      _stateController.add(LoginState.SUCCESS);
+    }else{
+      _stateController.add(LoginState.FAIL);
+    }
   }
 
   @override

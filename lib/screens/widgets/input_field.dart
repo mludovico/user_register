@@ -8,13 +8,16 @@ class InputField extends StatelessWidget {
   final bool obscure;
   final Stream<String> stream;
   final Widget suffix;
+  TextEditingController controller;
 
-  InputField({this.iconData, this.hint, this.obscure, this.stream, this.onChanged, this.suffix});
+  InputField({this.iconData, this.hint, this.obscure, this.stream, this.onChanged, this.suffix, this.controller});
 
   final Function(String) onChanged;
 
   @override
   Widget build(BuildContext context) {
+    if(controller == null)
+      controller = TextEditingController();
     return StreamBuilder<String>(
         stream: stream,
         builder: (context, snapshot) {
@@ -42,6 +45,7 @@ class InputField extends StatelessWidget {
             ),
             obscureText: obscure,
             autofocus: false,
+            controller: controller,
           );
         }
     );

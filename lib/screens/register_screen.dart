@@ -12,6 +12,9 @@ import 'package:user_register/screens/widgets/input_field.dart';
 
 class RegisterScreen extends StatefulWidget {
 
+  final email;
+  RegisterScreen({this.email});
+
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
 }
@@ -26,6 +29,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   void initState() {
     _bloc = BlocProvider.getBloc<RegistrationBloc>();
+    if(widget.email != null) {
+      print(widget.email);
+      _bloc.changeEmail(widget.email);
+    }
     super.initState();
   }
 
@@ -133,6 +140,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       hint: 'Email',
                       onChanged: _bloc.changeEmail,
                       obscure: false,
+                      controller: TextEditingController(text: widget.email == null ? '' : widget.email),
                     ),
                     InputField(
                       iconData: Icons.lock_outline,

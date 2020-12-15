@@ -152,9 +152,33 @@ class _LoginScreenState extends State<LoginScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: RaisedButton(
                         child: Text('Entrar'),
-                        onPressed: (){
-                          _bloc.submit();
-                        },
+                        onPressed: _bloc.submit,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                      child: RaisedButton(
+                        color: Colors.red,
+                        child: Text(
+                          'Entrar com Google',
+                          style: TextStyle(
+                              color: Colors.white
+                          ),
+                        ),
+                        onPressed: _bloc.loginWithGoogle,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                      child: RaisedButton(
+                        color: Color(0xff3b5998),
+                        child: Text(
+                          'Entrar com Facebook',
+                          style: TextStyle(
+                            color: Colors.white
+                          ),
+                        ),
+                        onPressed: _bloc.loginWithFacebook
                       ),
                     ),
                   ],
