@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc_pattern/bloc_pattern.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:user_register/blocs/login_bloc.dart';
 import 'package:user_register/blocs/states.dart';
@@ -61,18 +62,42 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Center(
-          child: Text(
-            'Bem vindo à tela inicial',
-            style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.w500,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ),
+      body: StreamBuilder<User>(
+        stream: _bloc.outUser,
+        builder: (context, snapshot) {
+          if(!snapshot.hasData)
+            return Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation(primary),
+              ),
+            );
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Olá, ${snapshot.data.displayName}',
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 20,),
+              CircleAvatar(
+                backgroundImage: NetworkImage(
+                  '${snapshot.data.photoURL}?width200&height=200',
+                ),
+                radius: 100,
+              ),
+              SizedBox(height: 20,),
+              Text(
+                'Bem vindo à tela inicial!!!',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.w500,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          );
+        }
       ),
     );
   }
