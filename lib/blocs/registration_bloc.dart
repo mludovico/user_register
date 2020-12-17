@@ -6,6 +6,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:user_register/blocs/states.dart';
 import 'package:user_register/helpers/validators.dart';
 import 'package:user_register/models/address.dart';
+import 'package:user_register/services/cep.dart';
 
 class RegistrationBloc extends BlocBase{
   final _firebase = FirebaseAuth.instance;
@@ -71,6 +72,14 @@ class RegistrationBloc extends BlocBase{
     };
     await _firestore.collection('users').doc(credential.user.uid).set(data);
     _stateController.add(LoginState.SUCCESS);
+  }
+
+  void getAddressFromZip(){
+    Cep cep = Cep(
+      address: Address(
+
+      )
+    );
   }
 
   @override

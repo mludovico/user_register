@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:user_register/constants/ui_styles.dart';
 
 class InputField extends StatelessWidget {
@@ -8,9 +9,13 @@ class InputField extends StatelessWidget {
   final bool obscure;
   final Stream<String> stream;
   final Widget suffix;
+  final List<TextInputFormatter> formatters;
+  final TextInputType keyboardType;
   TextEditingController controller;
 
-  InputField({this.iconData, this.hint, this.obscure, this.stream, this.onChanged, this.suffix, this.controller});
+  InputField({this.iconData, this.hint, this.obscure, this.stream,
+    this.onChanged, this.suffix, this.formatters, this.keyboardType,
+    this.controller});
 
   final Function(String) onChanged;
 
@@ -22,7 +27,9 @@ class InputField extends StatelessWidget {
         stream: stream,
         builder: (context, snapshot) {
           return TextField(
+            inputFormatters: formatters,
             onChanged: onChanged,
+            keyboardType: keyboardType,
             decoration: InputDecoration(
               icon: Icon(
                 iconData,
@@ -41,7 +48,7 @@ class InputField extends StatelessWidget {
               ),
               errorText: snapshot.hasError?snapshot.error:null,
               suffix: suffix,
-              errorMaxLines: 2
+              errorMaxLines: 2,
             ),
             obscureText: obscure,
             autofocus: false,

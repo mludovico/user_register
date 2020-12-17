@@ -1,13 +1,15 @@
 import 'dart:async';
 
 import 'package:bloc_pattern/bloc_pattern.dart';
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/services.dart';
 import 'package:user_register/blocs/registration_bloc.dart';
 import 'package:user_register/blocs/states.dart';
 import 'package:user_register/constants/ui_styles.dart';
 import 'package:user_register/screens/home_screen.dart';
-import 'package:user_register/screens/widgets/info_list_view.dart';
+import 'package:user_register/screens/widgets/address_list_view.dart';
 import 'package:user_register/screens/widgets/input_field.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -126,6 +128,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       hint: 'Data de nascimento',
                       onChanged: _bloc.changeBirthDate,
                       obscure: false,
+                      formatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        DataInputFormatter(),
+                      ],
+                      keyboardType: TextInputType.number,
                     ),
                     InputField(
                       iconData: Icons.wysiwyg_outlined,
@@ -133,6 +140,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       hint: 'CPF',
                       onChanged: _bloc.changeCpf,
                       obscure: false,
+                      formatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        CpfInputFormatter()
+                      ],
+                      keyboardType: TextInputType.number,
                     ),
                     InputField(
                       iconData: Icons.mail_outline,
@@ -164,13 +176,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         onPressed: togglePasswordVisibility,
                       ),
                     ),
-                    InfoListView(
+                    AddressListView(
                       iconData: Icons.location_on_outlined,
                       bloc: _bloc,
                       label: 'Endereço',
                       onAdd: (){},
                     ),
-                    InfoListView(
+                    AddressListView(
                       iconData: Icons.phone,
                       bloc: _bloc,
                       label: 'Telefone',
