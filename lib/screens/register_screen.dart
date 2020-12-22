@@ -11,6 +11,7 @@ import 'package:user_register/constants/ui_styles.dart';
 import 'package:user_register/screens/home_screen.dart';
 import 'package:user_register/screens/widgets/address_list_view.dart';
 import 'package:user_register/screens/widgets/input_field.dart';
+import 'package:user_register/screens/widgets/phone_list_view.dart';
 
 class RegisterScreen extends StatefulWidget {
 
@@ -176,16 +177,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         onPressed: togglePasswordVisibility,
                       ),
                     ),
+                    PhoneListView(
+                      iconData: Icons.phone,
+                      bloc: _bloc,
+                      label: 'Telefone',
+                      onAdd: (){},
+                    ),
                     AddressListView(
                       iconData: Icons.location_on_outlined,
                       bloc: _bloc,
                       label: 'Endereço',
-                      onAdd: (){},
-                    ),
-                    AddressListView(
-                      iconData: Icons.phone,
-                      bloc: _bloc,
-                      label: 'Telefone',
                       onAdd: (){},
                     ),
                     Padding(

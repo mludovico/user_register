@@ -29,6 +29,8 @@ class RegistrationBloc extends BlocBase{
   Stream<String> get outPasswordCheck => _passwordCheckController.stream.transform(Validators.validatePassword);
   Stream<List<Address>> get outAddress => _addressController.stream;
   Stream<List<String>> get outPhone => _phoneController.stream;
+  List<String> phoneList = [];
+  List<Address> addressList = [];
 
   StreamSubscription _stateSubscription;
 
@@ -72,6 +74,16 @@ class RegistrationBloc extends BlocBase{
     };
     await _firestore.collection('users').doc(credential.user.uid).set(data);
     _stateController.add(LoginState.SUCCESS);
+  }
+
+  void addPhone() {
+    phoneList.add('value');
+    _phoneController.add(phoneList);
+  }
+
+  void addAddress() {
+    addressList.add(Address());
+    _addressController.add(addressList);
   }
 
   void getAddressFromZip(){

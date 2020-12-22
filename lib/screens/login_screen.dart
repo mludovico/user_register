@@ -117,6 +117,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: togglePasswordVisibility,
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 25, right: 25, top: 25),
+                      child: RaisedButton(
+                        child: Text('Entrar'),
+                        onPressed: _bloc.submit,
+                      ),
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -148,12 +155,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
-                      child: RaisedButton(
-                        child: Text('Entrar'),
-                        onPressed: _bloc.submit,
+                    Divider(),
+                    Text(
+                      'ou',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w300,
                       ),
+                      textAlign: TextAlign.center,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
