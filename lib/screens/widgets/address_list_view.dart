@@ -45,7 +45,7 @@ class AddressListView extends StatelessWidget {
                   Icons.add,
                   color: primary,
                 ),
-                onPressed: bloc.addressList.length < 3 ? bloc.addAddress : null,
+                onPressed: bloc.addAddress,
               ),
             ]
         ),
@@ -54,38 +54,56 @@ class AddressListView extends StatelessWidget {
           builder: (context, snapshot) {
             if(!snapshot.hasData)
               return Container();
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              children: snapshot.data.map((item){
+            return ListView.builder(
+              itemCount: snapshot.data.length,
+              itemBuilder: (context, index){
                 return Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     InputField(
                       hint: 'CEP',
                       obscure: false,
+                      onChanged: (value) => bloc.changeAddress(
+                        index,
+                        Address(zip: value),
+                      ),
                       formatters: [
                         CepInputFormatter(),
                       ],
                       suffix: IconButton(
                         icon: Icon(Icons.search),
+                        onPressed: () => bloc.getAddressFromZip(index),
                       ),
                       keyboardType: TextInputType.number,
                     ),
                     InputField(
                       hint: 'Endereço',
                       obscure: false,
+                      onChanged: (value) => bloc.changeAddress(
+                        index,
+                        Address(address: value),
+                      ),
                     ),
                     InputField(
                       hint: 'Número',
                       obscure: false,
+                      onChanged: (value) => bloc.changeAddress(
+                        index,
+                        Address(number: int.tryParse(value)??0),
+                      ),
                       keyboardType: TextInputType.number,
                     ),
                     InputField(
                       hint: 'Complemento',
                       obscure: false,
+                      onChanged: (value) => bloc.changeAddress(
+                        index,
+                        Address(complement: value),
+                      ),
                     ),
                   ],
                 );
-              }).toList(),
+              },
             );
           },
         ),

@@ -44,7 +44,7 @@ class PhoneListView extends StatelessWidget {
                 Icons.add,
                 color: primary,
               ),
-              onPressed: bloc.phoneList.length < 3 ? bloc.addPhone : null,
+              onPressed: bloc.addPhone,
             ),
           ]
         ),
@@ -64,7 +64,7 @@ class PhoneListView extends StatelessWidget {
                       formatters: [
                         TelefoneInputFormatter(),
                       ],
-                      //onChanged: bloc.ch,
+                      // onChanged: bloc.ch,
                     ),
                   ],
                 );

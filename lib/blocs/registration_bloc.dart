@@ -77,16 +77,28 @@ class RegistrationBloc extends BlocBase{
   }
 
   void addPhone() {
-    phoneList.add('value');
+    if(phoneList.length < 3)
+      phoneList.add('value');
     _phoneController.add(phoneList);
   }
 
+  void changePhone(int index, String value) {
+    phoneList[index] = value;
+    _phoneController.sink.add(phoneList);
+  }
+
   void addAddress() {
-    addressList.add(Address());
+    if(addressList.length < 3)
+      addressList.add(Address());
     _addressController.add(addressList);
   }
 
-  void getAddressFromZip(){
+  void changeAddress(int index, Address address) {
+    addressList[index] = address;
+    _addressController.add(addressList);
+  }
+
+  void getAddressFromZip(int index){
     Cep cep = Cep(
       address: Address(
 
