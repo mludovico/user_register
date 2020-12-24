@@ -180,13 +180,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     PhoneListView(
                       iconData: Icons.phone,
                       bloc: _bloc,
-                      label: 'Telefone',
+                      label: 'Telefones',
                       onAdd: (){},
                     ),
                     AddressListView(
                       iconData: Icons.location_on_outlined,
                       bloc: _bloc,
-                      label: 'Endereço',
+                      label: 'Endereços',
                       onAdd: (){},
                     ),
                     Padding(

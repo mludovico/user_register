@@ -17,45 +17,59 @@ class PhoneListView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        ListTile(
-          leading: Icon(
-            iconData,
-            color: primary,
-          ),
-          title: Text(
-            label,
-            textAlign: TextAlign.center,
-          ),
-          trailing: IconButton(
-            icon: Icon(
-              Icons.add,
-              color: primary,
+        Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 15),
+              child: Icon(
+                iconData,
+                color: primary,
+              ),
             ),
-            onPressed: bloc.addPhone,
-          ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 5),
+                child: Text(
+                  label,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey[600]
+                  ),
+                ),
+              ),
+            ),
+            IconButton(
+              padding: EdgeInsets.only(right: 30),
+              icon: Icon(
+                Icons.add,
+                color: primary,
+              ),
+              onPressed: bloc.phoneList.length < 3 ? bloc.addPhone : null,
+            ),
+          ]
         ),
         StreamBuilder<List<String>>(
           stream: bloc.outPhone,
           builder: (context, snapshot) {
-            if(snapshot.hasData)
-              return ListView(
-                children: snapshot.data.map((item){
-                  return Column(
-                    children: [
-                      InputField(
-                        hint: 'Telefone',
-                        iconData: iconData,
-                        obscure: false,
-                        formatters: [
-                          CepInputFormatter(),
-                        ],
-                      ),
-                    ],
-                  );
-                }).toList(),
-              );
-            else
+            if(!snapshot.hasData)
               return Container();
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: snapshot.data.map((item){
+                return Column(
+                  children: [
+                    InputField(
+                      hint: 'Telefone',
+                      obscure: false,
+                      formatters: [
+                        TelefoneInputFormatter(),
+                      ],
+                      //onChanged: bloc.ch,
+                    ),
+                  ],
+                );
+              }).toList(),
+            );
           },
         ),
       ],
