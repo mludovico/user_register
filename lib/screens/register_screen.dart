@@ -87,20 +87,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
         title: Text('Cadastro'),
         centerTitle: true,
         backgroundColor: primary,
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.info_outline,
-              color: Colors.white,
-            ),
-          ),
-          IconButton(
-            icon: Icon(
-              Icons.translate,
-              color: Colors.white,
-            ),
-          ),
-        ],
       ),
       body: StreamBuilder<LoginState>(
         stream: _bloc.outState,

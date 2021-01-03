@@ -74,20 +74,6 @@ class _LoginScreenState extends State<LoginScreen> {
         title: Text('Login'),
         centerTitle: true,
         backgroundColor: primary,
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.info_outline,
-              color: Colors.white,
-            ),
-          ),
-          IconButton(
-            icon: Icon(
-              Icons.translate,
-              color: Colors.white,
-            ),
-          ),
-        ],
       ),
       body: StreamBuilder<LoginState>(
         stream: _bloc.outState,
