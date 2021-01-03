@@ -14,28 +14,28 @@ Some field validation is used in fields such as email, password, username as wel
 ## Screens
   
 ### Login
-![login screen](https://github.com/mludovico/user_register/raw/master/media/ura_login.png)
+<img src="https://github.com/mludovico/user_register/raw/master/media/ura_login.png" height="600")>
   
 ### Password Recovery
-![login screen](https://github.com/mludovico/user_register/raw/master/media/ura_recover.png)
+<img src="https://github.com/mludovico/user_register/raw/master/media/ura_recover.png" height="600")>
   
 ### Register
-![login screen](https://github.com/mludovico/user_register/raw/master/media/ura_register.png)
+<img src="https://github.com/mludovico/user_register/raw/master/media/ura_register.png" height="600")>
   
 ### Register multiple fields for addresses and phones
-![login screen](https://github.com/mludovico/user_register/raw/master/media/ura_register_multiple_fields.png)
+<img src="https://github.com/mludovico/user_register/raw/master/media/ura_register_multiple_fields.png" height="600")>
   
 ### Login with facebook
-![login screen](https://github.com/mludovico/user_register/raw/master/media/ura_login_facebook.png)
+<img src="https://github.com/mludovico/user_register/raw/master/media/ura_login_facebook.png" height="600")>
   
 ### Home screen with Facebook user
-![login screen](https://github.com/mludovico/user_register/raw/master/media/ura_home_facebook.png)
+<img src="https://github.com/mludovico/user_register/raw/master/media/ura_home_facebook.png" height="600")>
   
 ### Home screen with Google user
-![login screen](https://github.com/mludovico/user_register/raw/master/media/ura_home_google.png)
+<img src="https://github.com/mludovico/user_register/raw/master/media/ura_home_google.png" height="600")>
   
 ### Home screen with user and password
-![login screen](https://github.com/mludovico/user_register/raw/master/media/ura_home_email.png)
+<img src="https://github.com/mludovico/user_register/raw/master/media/ura_home_email.png" height="600")>
   
 ## State management
   
