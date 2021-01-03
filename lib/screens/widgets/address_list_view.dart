@@ -109,6 +109,12 @@ class AddressListView extends StatelessWidget {
                     InputField(
                       hint: 'Número',
                       obscure: false,
+                      focusNode: focusNodes['number'][index],
+                      controller: TextEditingController(
+                        text: snapshot.data[index].number.toString()
+                      )..selection = TextSelection.collapsed(
+                        offset: snapshot.data[index].number.toString().length,
+                      ),
                       onChanged: (value) => bloc.changeAddress(
                         index,
                         Address(number: int.tryParse(value)??0),
