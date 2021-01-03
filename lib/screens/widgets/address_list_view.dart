@@ -13,6 +13,11 @@ class AddressListView extends StatelessWidget {
   final void Function() onAdd;
   AddressListView({this.bloc, this.label, this.iconData, this.onAdd});
 
+  Map<String, List<FocusNode>> focusNodes = {
+    'zip': [],
+    'number': [],
+  };
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -55,30 +60,46 @@ class AddressListView extends StatelessWidget {
             if(!snapshot.hasData)
               return Container();
             return ListView.builder(
+              primary: false,
+              shrinkWrap: true,
               itemCount: snapshot.data.length,
               itemBuilder: (context, index){
+                focusNodes['zip'].add(FocusNode()..requestFocus());
+                focusNodes['number'].add(FocusNode());
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    index > 0 ? Divider() : Container(),
+                    Text('Endereço ${index + 1}'),
                     InputField(
                       hint: 'CEP',
                       obscure: false,
-                      onChanged: (value) => bloc.changeAddress(
-                        index,
-                        Address(zip: value),
-                      ),
+                      focusNode: focusNodes['zip'][index],
+                      controller: TextEditingController(
+                        text: snapshot.data[index].zip
+                      )..selection = TextSelection.collapsed(offset: snapshot.data[index].zip.length),
+                      onChanged: (value) => bloc.changeAddress(index, Address(zip: value)),
                       formatters: [
                         CepInputFormatter(),
                       ],
                       suffix: IconButton(
                         icon: Icon(Icons.search),
-                        onPressed: () => bloc.getAddressFromZip(index),
+                        onPressed: () async {
+                          bloc.getAddressFromZip(index);
+                          focusNodes['zip'][index].unfocus(disposition: UnfocusDisposition.scope);
+                          focusNodes['number'][index].requestFocus();
+                        },
                       ),
                       keyboardType: TextInputType.number,
                     ),
                     InputField(
                       hint: 'Endereço',
                       obscure: false,
+                      controller: TextEditingController(
+                        text: snapshot.data[index].address
+                      )..selection = TextSelection.collapsed(
+                        offset: snapshot.data[index].address.length,
+                      ),
                       onChanged: (value) => bloc.changeAddress(
                         index,
                         Address(address: value),
@@ -96,9 +117,53 @@ class AddressListView extends StatelessWidget {
                     InputField(
                       hint: 'Complemento',
                       obscure: false,
+                      controller: TextEditingController(
+                        text: snapshot.data[index].complement
+                      )..selection = TextSelection.collapsed(
+                        offset: snapshot.data[index].complement.length
+                      ),
                       onChanged: (value) => bloc.changeAddress(
                         index,
                         Address(complement: value),
+                      ),
+                    ),
+                    InputField(
+                      hint: 'Bairro',
+                      obscure: false,
+                      controller: TextEditingController(
+                        text: snapshot.data[index].district
+                      )..selection = TextSelection.collapsed(
+                        offset: snapshot.data[index].district.length
+                      ),
+                      onChanged: (value) => bloc.changeAddress(
+                        index,
+                        Address(district: value),
+                      ),
+                    ),
+                    InputField(
+                      hint: 'Cidade',
+                      obscure: false,
+                      controller: TextEditingController(
+                        text: snapshot.data[index].city
+                      )..selection = TextSelection.collapsed(
+                        offset: snapshot.data[index].city.length
+                      ),
+                      onChanged: (value) => bloc.changeAddress(
+                        index,
+                        Address(city: value),
+                      ),
+                    ),
+                    InputField(
+                      hint: 'Estado',
+                      obscure: false,
+                      controller: TextEditingController(
+                        text: snapshot.data[index].state
+                      )..selection = TextSelection.collapsed(
+                        offset: snapshot.data[index].state.length
+                      ),
+                      onChanged: (value) => bloc.changeAddress(
+                        index,
+                        Address(state: value),
                       ),
                     ),
                   ],

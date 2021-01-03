@@ -82,7 +82,7 @@ class RegistrationBloc extends BlocBase{
 
   void addPhone() {
     if(phoneList.length < 3)
-      phoneList.add('value');
+      phoneList.add('');
     _phoneController.add(phoneList);
   }
 
@@ -93,21 +93,37 @@ class RegistrationBloc extends BlocBase{
 
   void addAddress() {
     if(addressList.length < 3)
-      addressList.add(Address());
+      addressList.add(
+        Address(
+          zip: '',
+          address: '',
+          number: 0,
+          complement: '',
+          district: '',
+          city: '',
+          state: '',
+        ),
+      );
     _addressController.add(addressList);
   }
 
   void changeAddress(int index, Address address) {
-    addressList[index] = address;
+    addressList[index] = addressList[index].updateFrom(address);
     _addressController.add(addressList);
   }
 
-  void getAddressFromZip(int index){
-    Cep cep = Cep(
-      address: Address(
-
-      )
-    );
+  Future<void> getAddressFromZip(int index) async {
+    _stateController.add(LoginState.LOADING);
+    final cep = Zip(address: addressList[index]);
+    try{
+      addressList[index].updateFrom(await cep.get(address: cep.address));
+      print(addressList[index].toMap());
+      _addressController.add(addressList);
+    }catch(error, stackTrace){
+      print(error);
+      print(stackTrace);
+    }
+    _stateController.add(LoginState.IDLE);
   }
 
   @override

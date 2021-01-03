@@ -11,11 +11,13 @@ class InputField extends StatelessWidget {
   final Widget suffix;
   final List<TextInputFormatter> formatters;
   final TextInputType keyboardType;
+  final FocusNode focusNode;
+  final bool autoFocus;
   TextEditingController controller;
 
   InputField({this.iconData, this.hint, this.obscure, this.stream,
     this.onChanged, this.suffix, this.formatters, this.keyboardType,
-    this.controller});
+    this.controller, this.focusNode, this.autoFocus});
 
   final Function(String) onChanged;
 
@@ -30,6 +32,7 @@ class InputField extends StatelessWidget {
             inputFormatters: formatters,
             onChanged: onChanged,
             keyboardType: keyboardType,
+            focusNode: focusNode,
             decoration: InputDecoration(
               icon: Icon(
                 iconData,

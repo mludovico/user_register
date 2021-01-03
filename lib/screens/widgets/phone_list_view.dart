@@ -10,6 +10,7 @@ class PhoneListView extends StatelessWidget {
     final String label;
     final IconData iconData;
     final void Function() onAdd;
+
     PhoneListView({this.bloc, this.label, this.iconData, this.onAdd});
 
   @override
@@ -53,23 +54,25 @@ class PhoneListView extends StatelessWidget {
           builder: (context, snapshot) {
             if(!snapshot.hasData)
               return Container();
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              children: snapshot.data.map((item){
-                return Column(
-                  children: [
-                    InputField(
-                      hint: 'Telefone',
-                      obscure: false,
-                      formatters: [
-                        TelefoneInputFormatter(),
-                      ],
-                      // onChanged: bloc.ch,
-                    ),
+            return ListView.builder(
+              primary: false,
+              shrinkWrap: true,
+              itemCount: snapshot.data.length,
+              itemBuilder: (context, index){
+                final selection = TextSelection.collapsed(offset: snapshot.data[index].length);
+                return InputField(
+                  hint: 'Telefone',
+                  obscure: false,
+                  formatters: [
+                    Formatters.phoneFormatter,
                   ],
+                  controller: TextEditingController(
+                    text: snapshot.data[index],
+                  )..selection = selection,
+                  keyboardType: TextInputType.number,
+                  onChanged: (value) => bloc.changePhone(index, value),
                 );
-              }).toList(),
-            );
+              });
           },
         ),
       ],
