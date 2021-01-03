@@ -5,12 +5,12 @@ import 'package:user_register/models/address.dart';
 
 enum ResponseType {JSON, XML}
 
-class Cep {
+class Zip {
 
   String _url = 'https://viacep.com.br/ws';
   Address address;
 
-  Cep({this.address});
+  Zip({this.address});
 
   Future<Address> get({Address address, ResponseType responseType = ResponseType.JSON}) async {
     String type = responseType.toString().split('.')[1].toLowerCase();

@@ -6,7 +6,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:user_register/blocs/states.dart';
 import 'package:user_register/helpers/validators.dart';
 import 'package:user_register/models/address.dart';
-import 'package:user_register/services/cep.dart';
+import 'package:user_register/services/zip.dart';
 
 class RegistrationBloc extends BlocBase{
   final _firebase = FirebaseAuth.instance;
