@@ -24,7 +24,6 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
 
-  TextEditingController _birthDateController = TextEditingController(text: '');
   bool passwordObscure = true;
   RegistrationBloc _bloc;
   StreamSubscription subscription;
