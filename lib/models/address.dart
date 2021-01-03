@@ -11,22 +11,40 @@ class Address {
     this.city, this.state});
 
   factory Address.fromMap(Map json) => Address(
-    zip: json['zip'] == null ? '' : json['zip'],
-    address: json['address'] == null ? '' : json['address'],
-    number: json['number'] == null ? 0 : json['number'],
-    complement: json['complement'] == null ? '' : json['complement'],
-    district: json['district'] == null ? '' : json['district'],
-    city: json['city'] == null ? '' : json['city'],
-    state: json['state'] == null ? '' : json['state'],
+    zip: json['cep'] == null ? '' : json['cep'],
+    address: json['logradouro'] == null ? '' : json['logradouro'],
+    // number: json['number'] == null ? 0 : json['number'],
+    complement: json['complemento'] == null ? '' : json['complemento'],
+    district: json['bairro'] == null ? '' : json['bairro'],
+    city: json['localidade'] == null ? '' : json['localidade'],
+    state: json['uf'] == null ? '' : json['uf'],
   );
 
-  Map toMap() => {
+  Map<String, dynamic> toMap() => {
     'zip': zip == null ? '' : zip,
     'address': address == null ? '' : address,
     'number': number == null ? '' : number,
     'complement': complement == null ? '' : complement,
     'district': district == null ? '' : district,
-    'city': city = null ? '' : city,
+    'city': city == null ? '' : city,
     'state': state == null ? '' : state,
   };
+
+  Address updateFrom(Address address){
+    if(address.zip != null)
+      this.zip = address.zip;
+    if(address.address != null)
+      this.address = address.address;
+    if(address.number != null)
+      this.number = address.number;
+    if(address.complement != null)
+      this.complement = address.complement;
+    if(address.district != null)
+      this.district = address.district;
+    if(address.city != null)
+      this.city = address.city;
+    if(address.state != null)
+      this.state = address.state;
+    return this;
+  }
 }
