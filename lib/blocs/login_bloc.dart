@@ -23,10 +23,11 @@ class LoginBloc extends BlocBase {
   Function(String) get changePassword => _passwordController.sink.add;
 
   LoginBloc(){
-    _stateSubscription = _firebase.authStateChanges().listen((user) {
-      if(user != null){
-        _stateController.add(LoginState.SUCCESS);
+    _stateSubscription = _firebase.userChanges().listen((user) async {
+      if(user != null && user?.displayName != null){
+        user.providerData.forEach((element) {print(element);});
         _userController.add(user);
+        _stateController.add(LoginState.SUCCESS);
       }else{
         //_firebase.signOut();
         _stateController.add(LoginState.IDLE);

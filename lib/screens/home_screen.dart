@@ -80,6 +80,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 20,),
+              snapshot.data.photoURL == null
+                ?
+              Icon(
+                Icons.person_outline,
+                color: primary,
+                size: 200,
+              )
+                :
               CircleAvatar(
                 backgroundImage: NetworkImage(
                   '${snapshot.data.photoURL}?width200&height=200',

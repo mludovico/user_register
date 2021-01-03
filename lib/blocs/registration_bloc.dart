@@ -61,9 +61,13 @@ class RegistrationBloc extends BlocBase{
       print(stacktrace);
       _stateController.add(LoginState.FAIL);
     });
-    await credential.user.updateProfile(
-      displayName: _nameController.value
-    );
+    await _firebase.currentUser.updateProfile(
+      displayName: _nameController.value,
+    ).catchError((e, stackTrace){
+      print(e);
+      print(stackTrace);
+    });
+    await _firebase.currentUser.reload();
     var data = {
       'name': _nameController.value,
       'email': _emailController.value,
