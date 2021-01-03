@@ -14,28 +14,28 @@ Some field validation is used in fields such as email, password, username as wel
 ## Screens
   
 ### Login
-<img src="https://github.com/mludovico/user_register/raw/master/media/ura_login.png" height="600")>
+<img src="https://github.com/mludovico/user_register/raw/master/media/ura_login.png" height="600"/>
   
 ### Password Recovery
-<img src="https://github.com/mludovico/user_register/raw/master/media/ura_recover.png" height="600")>
+<img src="https://github.com/mludovico/user_register/raw/master/media/ura_recover.png" height="600"/>
   
 ### Register
-<img src="https://github.com/mludovico/user_register/raw/master/media/ura_register.png" height="600")>
+<img src="https://github.com/mludovico/user_register/raw/master/media/ura_register.png" height="600"/>
   
 ### Register multiple fields for addresses and phones
-<img src="https://github.com/mludovico/user_register/raw/master/media/ura_register_multiple_fields.png" height="600")>
+<img src="https://github.com/mludovico/user_register/raw/master/media/ura_register_multiple_fields.png" height="600"/>
   
 ### Login with facebook
-<img src="https://github.com/mludovico/user_register/raw/master/media/ura_login_facebook.png" height="600")>
+<img src="https://github.com/mludovico/user_register/raw/master/media/ura_login_facebook.png" height="600"/>
   
 ### Home screen with Facebook user
-<img src="https://github.com/mludovico/user_register/raw/master/media/ura_home_facebook.png" height="600")>
+<img src="https://github.com/mludovico/user_register/raw/master/media/ura_home_facebook.png" height="600"/>
   
 ### Home screen with Google user
-<img src="https://github.com/mludovico/user_register/raw/master/media/ura_home_google.png" height="600")>
+<img src="https://github.com/mludovico/user_register/raw/master/media/ura_home_google.png" height="600"/>
   
 ### Home screen with user and password
-<img src="https://github.com/mludovico/user_register/raw/master/media/ura_home_email.png" height="600")>
+<img src="https://github.com/mludovico/user_register/raw/master/media/ura_home_email.png" height="600"/>
   
 ## State management
   
