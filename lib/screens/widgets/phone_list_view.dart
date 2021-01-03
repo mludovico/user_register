@@ -2,6 +2,7 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:user_register/blocs/registration_bloc.dart';
 import 'package:user_register/constants/ui_styles.dart';
+import 'package:user_register/helpers/formatters.dart';
 import 'package:user_register/screens/widgets/input_field.dart';
 
 class PhoneListView extends StatelessWidget {

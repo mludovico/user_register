@@ -72,86 +72,61 @@ class Formatters {
         selection: TextSelection.collapsed(offset: selectionIndex),
       );
     });
-  
-  static final TextInputFormatter phoneFormatter =
-    TextInputFormatter.withFunction((oldValue, newValue){
-      final newTextLength = newValue.text.length;
 
-      var selectionIndex = newValue.selection.end;
-
-      if (newTextLength == 11) {
-        if (newValue.text.toString()[2] != '9') {
-          return oldValue;
+  static final TextInputFormatter phoneFormatter = TextInputFormatter
+      .withFunction((oldValue, newValue){
+        print(oldValue.text);
+        print(newValue.text);
+        if(oldValue.text.length == 2 && newValue.text.length == 1) {
+          return TextEditingValue(
+            text: '',
+            selection: TextSelection.collapsed(
+              offset: 0,
+            ),
+          );
         }
-      }
-
-      if (newTextLength > 11) {
-        return oldValue;
-      }
-
-      var usedSubstringIndex = 0;
-
-      final newText = StringBuffer();
-
-      if (newTextLength >= 1) {
-        newText.write('(');
-        if (newValue.selection.end >= 1) selectionIndex++;
-      }
-
-      if (newTextLength >= 3) {
-        newText.write(newValue.text.substring(0, usedSubstringIndex = 2) + ') ');
-        if (newValue.selection.end >= 2) selectionIndex += 2;
-      }
-
-      if (newValue.text.length == 11) {
-        if (newTextLength >= 8) {
-          newText
-              .write(newValue.text.substring(2, usedSubstringIndex = 7) + '-');
-          if (newValue.selection.end >= 7) selectionIndex++;
+        if(newValue.text.length == 2 && !newValue.text.contains('(')) {
+          String value = '(${newValue.text})';
+          return TextEditingValue(
+            text: value,
+            selection: TextSelection.collapsed(
+              offset: value.length,
+            ),
+          );
         }
-      } else {
-        if (newTextLength >= 7) {
-          newText
-              .write(newValue.text.substring(2, usedSubstringIndex = 6) + '-');
-          if (newValue.selection.end >= 6) selectionIndex++;
+        if(!newValue.text.contains(')9') && newValue.text.length > 12) {
+          String value = newValue.text.substring(0, 12);
+          return TextEditingValue(
+            text: value,
+            selection: TextSelection.collapsed(offset: 12,),
+          );
         }
-      }
-
-      if (newTextLength >= usedSubstringIndex) {
-        newText.write(newValue.text.substring(usedSubstringIndex));
-      }
-
-      return TextEditingValue(
-        text: newText.toString(),
-        selection: TextSelection.collapsed(offset: selectionIndex),
-      );
-    });
+        if(newValue.text.length > 13) {
+          String value = newValue.text.substring(0, 13);
+          return TextEditingValue(
+            text: value,
+            selection: TextSelection.collapsed(offset: 13,),
+          );
+        }
+      return newValue;
+  });
 
   static final TextInputFormatter zipFormatter =
     TextInputFormatter.withFunction((oldValue, newValue){
-      final int maxLength = 8;
-      final newLength = newValue.text.length;
-      var selectionIndex = newValue.selection.end;
-
-      if (newLength > maxLength) {
-        return oldValue;
+      if (newValue.text.length > 5 && !newValue.text.contains('-')) {
+        String value = '${newValue.text.substring(0, 5)}-${newValue.text.substring(5)}';
+        return TextEditingValue(
+          text: value,
+          selection: TextSelection.collapsed(offset: value.length),
+        );
       }
-      var substrIndex = 0;
-      final newText = StringBuffer();
-
-      if (newLength >= 6) {
-        newText
-            .write(newValue.text.substring(0, substrIndex = 5) + '-');
-        if (newValue.selection.end >= 5) selectionIndex++;
+      if (newValue.text.length > 9) {
+        final value = newValue.text.substring(0, 9);
+        return TextEditingValue(
+          text: value,
+          selection: TextSelection.collapsed(offset: value.length),
+        );
       }
-
-      if (newLength >= substrIndex) {
-        newText.write(newValue.text.substring(substrIndex));
-      }
-
-      return TextEditingValue(
-        text: newText.toString(),
-        selection: TextSelection.collapsed(offset: selectionIndex),
-      );
+      return newValue;
     });
 }
