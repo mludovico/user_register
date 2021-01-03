@@ -73,10 +73,15 @@ class RegistrationBloc extends BlocBase{
       'email': _emailController.value,
       'birthDate': _birthDateController.value,
       'cpf': _cpfController.value,
-      'addresses': _addressController.value,
-      'phones': _phoneController.value,
     };
-    await _firestore.collection('users').doc(credential.user.uid).set(data);
+    final userData = _firestore.collection('users').doc(credential.user.uid);
+    await userData.set(data);
+    for(Address address in _addressController.value??[]){
+      await userData.collection('addresses').add(address.toMap());
+    }
+    for(String phone in _phoneController.value??[]){
+      await userData.collection('phones').add({'phone': phone});
+    }
     _stateController.add(LoginState.SUCCESS);
   }
 
