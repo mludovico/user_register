@@ -49,4 +49,8 @@ The app uses the [viacep](https://viacep.com.br/) api to retrieve jsonn address 
 
 When the users register themselves with email and password, the information provided in the register screen fields is also saved to firestore in a document with an uid that is equal to the user uid. It can be used after to retrieve user information inside the app, altough nothing has been really implemented after the home screen.
 
+## Tests
+
+Tests was not yet implemented, But I intend to make some unit tests on blocs and integration/widget tests on screens.
+
 ### Feel free to [contact me](https://github.com/mludovico) for more information.
