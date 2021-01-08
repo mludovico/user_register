@@ -8,7 +8,7 @@ This app uses firebase, facebook login and google auth api. So it requires some 
 
 ## Scope
 
-This app is a simple implementation of firebase auth funciotnalities using commom Flutter widgets with some custom configuration. Within this app is possible to login using a pre-existing user and password, create an account with user and password, create an app's account with Facebook Account and create an app's account using Google account.
+This app is a simple implementation of firebase auth functionality using common Flutter widgets with some custom configuration. Within this app is possible to login using a pre-existing user and password, create an account with user and password, create an app's account with Facebook Account and create an app's account using Google account.
 Some field validation is used in fields such as email, password, username as well as formatters in phone, zip code and date to give it better visualization.
 
 ## Screens
@@ -43,7 +43,7 @@ The state management is made with bloc provider. Each screen has a respective bl
 
 ## Integrations
 
-The app uses the [viacep](https://viacep.com.br/) api to retrieve jsonn address information and automatically fill the subsequent fields. Each address added brings a zip code field that can then search for the given code. The fields can still be edited after.
+The app uses the [viacep](https://viacep.com.br/) api to retrieve json address information and automatically fill the subsequent fields. Each address added brings a zip code field that can then search for the given code. The fields can still be edited after.
 
 ## Firestore
 
